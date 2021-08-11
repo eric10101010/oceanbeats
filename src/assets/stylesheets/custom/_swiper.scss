@@ -1,0 +1,40 @@
+.swiper-button-prev,
+.swiper-button-next {
+  opacity: 0.5;
+  color: $third;
+  padding: 30px;
+  &:hover {
+    opacity: 0.8;
+    padding: 30px;
+  }
+}
+.swiper-button-prev ,.swiper-button-next {
+  position: absolute;
+  background-color: $primary;
+  border-radius:50%;
+  padding: 30px;
+}
+.swiper-button-prev{
+  left: 2px;  
+}
+.swiper-button-next{
+  right: 2px;  
+}
+.swiper-container {
+  overflow: hidden !important;
+}
+.swiper-img {
+  @include media-breakpoint-up(sm) {
+    height: 200px;
+  }
+  @include media-breakpoint-up(md) {
+    height: 250px;
+  }
+  @include media-breakpoint-up(lg) {
+    height: 300px;
+  }
+  @include media-breakpoint-up(xl) {
+    height: 300px;
+  }
+}
+
