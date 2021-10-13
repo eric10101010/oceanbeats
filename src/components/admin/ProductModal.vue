@@ -90,16 +90,34 @@
             </div>
             <hr>
             <div class="form-group">
-              <label for="description">產品描述</label>
-              <textarea id="description" v-model="tempProduct.description" type="text" class="form-control my-3"
-                placeholder="請輸入產品描述">
-            </textarea>
+              <label for="drivers">驅動單元</label>
+              <textarea id="drivers" v-model="tempProduct.drivers" type="text" class="form-control my-3"
+                placeholder="請輸入產品規格描述">
+              </textarea>
+            </div>
+            <div class="form-group">
+              <label for="infor">通訊使用頻段</label>
+              <textarea id="infor" v-model="tempProduct.infor" type="text" class="form-control my-3"
+                placeholder="請輸入產品規格描述">
+              </textarea>
+            </div>
+            <div class="form-group">
+              <label for="fequency">頻率響應</label>
+              <textarea id="fequency" v-model="tempProduct.fequency" type="text" class="form-control my-3"
+                placeholder="請輸入產品規格描述">
+              </textarea>
+            </div>
+            <div class="form-group">
+              <label for="weight">產品重量</label>
+              <textarea id="weight" v-model="tempProduct.weight" type="text" class="form-control my-3"
+                placeholder="請輸入產品規格描述">
+              </textarea>
             </div>
             <div class="form-group">
               <label for="content">說明內容</label>
               <textarea id="content" v-model="tempProduct.content" type="text" class="form-control my-3"
                 placeholder="請輸入說明內容">
-            </textarea>
+              </textarea>
             </div>
             <div class="form-group mt-5">
               <div class="form-check form-switch">

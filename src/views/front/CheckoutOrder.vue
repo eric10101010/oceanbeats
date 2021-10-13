@@ -1,18 +1,53 @@
 <template>
   <div>
-    <div class="banner mb-5">
-      <div class="d-flex justify-content-center align-items-center h-100">
-        <div class="container">
-        <ul class="row">
-          <li class="banner-box col-lg-12 col-md-12 col-12 bg-dark text-light py-2 py-sm-4">
-            <h2 class="text-center p-4">結帳</h2>
-          </li>
-        </ul>
+    <!-- Banner -->
+    <div class="banner container-fluid d-flex align-items-center justify-content-center my-5">
+      <div class="row banner-box p-3 w-100">
+        <div class="text-white text-center ">
+          <h2 class="text-center p-4">結帳</h2>
         </div>
       </div>
     </div>
     <div class="container mb-6">
       <div class="row d-flex justify-content-evenly">
+        <div class="d-flex">
+          <ul class="steps list-unstyled d-flex justify-content-between position-relative mx-auto mb-5">
+            <li class="steps-item w-33 px-4 py-2">
+              <p class="steps-circle d-flex justify-content-center align-items-center">
+                <i class="bi bi-check-circle text-success" style="font-size:50px;"></i>
+              </p>
+              資料填寫
+            </li>
+            <li
+              class="steps-item w-33 px-4 py-2"
+              :class="{ active: !isPaid, success: isPaid || order.is_paid }"
+            >
+              <template v-if="isPaid || order.is_paid">
+                <p class="steps-circle d-flex justify-content-center align-items-center">
+                  <i class="bi bi-check-circle text-success" style="font-size:50px;"></i>
+                </p>
+              </template>
+              <p class="steps-circle d-flex justify-content-center align-items-center bg-danger" v-else>
+                <span class="h3 text-white text-center pt-2">2</span>
+              </p>
+              訂單建立
+            </li>
+            <li
+              class="steps-item w-33 px-4 py-2"
+              :class="{ active: isPaid, success: order.is_paid }"
+            >
+              <p class="steps-circle d-flex justify-content-center align-items-center bg-danger" v-if="isPaid || order.is_paid">
+                <span class="h3 text-white text-center pt-2">3</span>
+              </p>
+                <template v-else>
+                  <p class="steps-circle d-flex justify-content-center align-items-center bg-third">
+                    <span class="h3 text-white text-center pt-2">3</span>
+                  </p>
+                </template>
+              付款完成
+            </li>
+          </ul>
+        </div>
         <!--訂單資料-->
         <div class="col-lg-5 col-md-5 col-12 mb-4">
           <div class="col-lg-12 p-0 border border-third">
@@ -157,7 +192,6 @@
 </template>
 
 <script>
-
 export default {
   data () {
     return {
@@ -237,11 +271,12 @@ export default {
 .banner {
   height: calc(30vh + 50px);
   background-color: #ccc;
-  background: url('https://images.unsplash.com/photo-1594998440033-042baa3ee40c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80') 50% 25%;
+  background: url('https://images.unsplash.com/photo-1514742923401-b8ae3074e468?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80') 50% 30%;
   background-size: cover;
 }
 .banner-box {
-  opacity: 0.8;
+  background-color: #000000;
+  opacity: 0.7;
 }
 .status img{
   max-width: 150px;
@@ -249,5 +284,17 @@ export default {
 }
 .cart-list{
   border-bottom: 1px solid #ccc;
+}
+.steps-item{
+  // border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.steps-circle{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 </style>

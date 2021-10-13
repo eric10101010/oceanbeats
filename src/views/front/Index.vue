@@ -1,9 +1,9 @@
 <template>
   <div>
     <!---首頁區塊1-banner--->
-    <div class="banner container-fluid d-flex align-items-center justify-content-center mb-5 mt-5">
+    <div class="banner container-fluid d-flex align-items-center justify-content-center my-5">
         <div class="row banner-box p-3">
-          <div class="col-lg-12 col-md-12 col-12 fs-5 fs-md-3 fw-normal text-white text-center ">
+          <div class="col-lg-12 col-md-12 col-12 text-white text-center ">
             <h2> Oceanbeats</h2>
             <h2 class="typing">『專注打造聽感沉浸』</h2>
             <div class="h4 pt-4 text-center">
@@ -17,22 +17,22 @@
     <!---首頁區塊2-品牌介紹--->
     <div class="about container my-3 mb-5">
       <div class="row">
-        <div class="about-img col-lg-6 col-md-6 col-12 mb-4">
-          <img src="https://i.imgur.com/XQWFiqx.jpg" alt="">
+        <div class="about-img col-lg-6 col-md-6 col-12 mb-4 mb-lg-0 mb-md-0">
+          <img src="https://i.imgur.com/XQWFiqx.jpg" alt="about-photo">
         </div>
-        <div class="about-text col-lg-6 col-md-6 col-12 d-flex flex-column justify-content-center text-center px-4 ">
-          <h3 class="pb-4 fw-bolder ">品牌願景</h3>
+        <div class="about-text col-lg-6 col-md-6 col-12 d-flex flex-column justify-content-center text-center px-4 mb-4 mb-lg-0 mb-md-0">
+          <h3 class="pb-lg-4 pb-sm-0 fw-bolder">品牌願景</h3>
            <p>Oceanbeats願產品能夠提供頂級的音質與最舒適的佩戴體驗，</p>
           <p>致力於降躁科技的開發研究，加上配戴舒適度調整改良，</p>
           <p>當使用者戴上Oceanbeats耳機後便可於音樂世界中盡情遨遊。</p>
         </div>
       </div>
       <div class="row d-flex flex-row-reverse">
-        <div class="about-img col-lg-6 col-md-6 col-12 mb-4">
-          <img src="https://i.imgur.com/4RCfmNd.jpg" alt="">
+        <div class="about-img col-lg-6 col-md-6 col-12 mb-4 mb-lg-0 mb-md-0">
+          <img src="https://i.imgur.com/4RCfmNd.jpg" alt="about-photo">
         </div>
         <div class="about-text col-lg-6 col-md-6 col-12 d-flex flex-column justify-content-center text-center px-4">
-          <h3 class="pb-4 fw-bolder">品牌風格</h3>
+          <h3 class="pb-lg-4 pb-sm-0 fw-bolder">品牌風格</h3>
           <p>Oceanbeats主打海洋輕盈風，若用海洋比擬音樂，</p>
           <p>那無論是海上的驚滔駭浪，抑或是海底安寧沉穩，</p>
           <p>採用的獨家晶片皆可真實重現重低音及紓壓BGM的沉浸感。</p>
@@ -667,7 +667,7 @@ export default {
 }
 @media(max-width:768px){
   .about-text p{
-    font-size: 30px;
+    font-size: 16px;
   }
 }
 @media(max-width:414px){

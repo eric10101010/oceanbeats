@@ -1,37 +1,33 @@
 <template>
- <div>
-   <!-- Banner -->
-   <div class="banner mb-5">
-     <div class="d-flex justify-content-center align-items-center h-100">
-       <div class="container">
-        <ul class="row">
-          <li class="banner-box col-lg-12 col-md-12 col-12 bg-dark text-light py-2 py-sm-4">
-            <h2 class="text-center p-4">商品列表</h2>
-          </li>
-        </ul>
-       </div>
-     </div>
-   </div>
-   <!-- breadcrumb -->
-   <div class="breadcrumb container">
-     <nav aria-label="breadcrumb row mb-3">
-      <ul class="breadcrumb col-lg-12 col-md-12 col-12" aria-label="breadcrumb mb-3">
-          <li class="breadcrumb-item">
-            <router-link to="/" class="text-secondary text-decoration-none">
-              首頁
-            </router-link>
-          </li>
-          <li class="breadcrumb-item">
-            <router-link to="/products" class="text-secondary text-decoration-none">
-              商品列表
-            </router-link>
-          </li>
-          <li class="breadcrumb-item active text-third" aria-current="page">
-            全部商品
-          </li>
-      </ul>
-     </nav>
-   </div>
+<div>
+  <!-- Banner -->
+  <div class="banner container-fluid d-flex align-items-center justify-content-center my-5">
+    <div class="row banner-box p-3 w-100">
+      <div class="text-white text-center ">
+        <h2 class="text-center p-4">商品列表</h2>
+      </div>
+    </div>
+  </div>
+  <!-- breadcrumb -->
+  <div class="breadcrumb container">
+    <nav aria-label="breadcrumb row mb-3">
+    <ul class="breadcrumb col-lg-12 col-md-12 col-12" aria-label="breadcrumb mb-3">
+        <li class="breadcrumb-item">
+          <router-link to="/" class="text-secondary text-decoration-none">
+            首頁
+          </router-link>
+        </li>
+        <li class="breadcrumb-item">
+          <router-link to="/products" class="text-secondary text-decoration-none">
+            商品列表
+          </router-link>
+        </li>
+        <li class="breadcrumb-item active text-third" aria-current="page">
+          全部商品
+        </li>
+    </ul>
+    </nav>
+  </div>
    <!-- 產品列表 -->
    <section class="product-list">
     <div class="container">
@@ -50,14 +46,21 @@
           <ul class="row list-unstyled">
             <li class="col-12 col-md-6 col-lg-4 mb-5 px-2 position-relative" v-for="item of searchProducts" :key="item.id" >
               <!-- 產品容器 -->
-              <div class="product-box card">
+              <div class="product-box card ">
                   <!-- 1.分類tag -->
                   <span class="badge bg-primary text-whit">
                     {{ item.category }}
                   </span>
                   <!-- 2.收藏tag -->
-                  <span class="favorite">
-                    <i class="bi bi-bookmark-heart"></i>
+                    <span class="favorite btn">
+                      <i  class="bi bi-heart-fill text-third"
+                          style="top:0px; right:0px; z-index: 10; font-size:45px;"
+                          @click.prevent="addFavorite(item)"
+                          :class="{
+                            'active text-danger': myFavorite.includes(item.id),
+                          }"
+                      >
+                      </i>
                   </span>
                 <!-- 3.產品圖片 -->
                 <div class="p-3 text-decoration-none">
@@ -88,7 +91,7 @@
                       </ul>
                       <div class="add-btn mt-2 text-center d-flex align-items-center justify-content-center " @click.prevent="addCart(item)">
                         <button class="bg-secondary px-5" style="font-size:20px">
-                          <span class="text-light"><i class="bi bi-cart"></i>加入購物車</span>
+                          <span class="text-light"><i class="bi bi-cart pe-3"></i>加入購物車</span>
                         </button>
                       </div>
                     </div>
@@ -122,7 +125,9 @@ export default {
       productWithPagination: [],
       pagination: {},
       search: '',
-      buyNum: 1
+      buyNum: 1,
+      myFavorite: [], // 收藏清單(我的最愛)
+      favoriteProduct: []
     }
   },
   methods: {
@@ -187,6 +192,75 @@ export default {
           this.$swal({ title: '成功加入購物車', icon: 'success' })
         })
         .catch(err => console.log(err))
+    },
+    getFavorite () {
+      this.myFavorite = this.getLocalStorage() || []
+      this.favoriteProduct = []
+      this.isLoading = true
+      if (this.myFavorite.length > 0) {
+        this.myFavorite.forEach((item) => {
+          const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${item}`
+          this.$http.get(url)
+            .then((res) => {
+              if (res.data.success) {
+                this.favoriteProduct.push(res.data)
+                console.log(res.data)
+                this.isLoading = false
+              } else {
+                this.isLoading = false
+              }
+            })
+            .catch(() => {
+              this.$swal({
+                title: '發生錯誤，請重新整理此頁面</p>',
+                icon: 'error'
+              })
+            })
+        })
+      } else {
+        this.isLoading = false
+      }
+    },
+    saveLocalStorage (favorite) {
+      // 存檔:把丟進來的東西先做轉型(物件轉字串)
+      const favoriteString = JSON.stringify(favorite)
+      localStorage.setItem('saveFavorite', favoriteString)
+    },
+    getLocalStorage () {
+      // 讀檔:取出 saveFavorite欄位字串內容轉回物件
+      return JSON.parse(localStorage.getItem('saveFavorite'))
+    },
+    addFavorite (item) {
+      if (this.myFavorite.includes(item.id)) {
+        this.myFavorite.splice(this.myFavorite.indexOf(item.id), 1)
+        this.saveLocalStorage(this.myFavorite)
+        emitter.emit('update-favorite')
+        this.$swal({
+          title: '商品已從收藏清單中移除',
+          icon: 'success'
+        })
+      } else {
+        this.myFavorite.push(item.id)
+        emitter.emit('update-favorite')
+        this.$swal({
+          title: '商品已加入收藏清單',
+          icon: 'success'
+        })
+      }
+      this.saveLocalStorage(this.myFavorite)
+      // this.emitter.emit('update-favorite')
+    },
+    removeFavoriteItem (item) {
+      this.myFavorite.splice(this.myFavorite.indexOf(item.id), 1)
+      this.saveLocalStorage(this.myFavorite)
+      // this.emitter.emit('update-favorite')
+      emitter.emit('update-favorite')
+      this.isLoading = true
+      this.$swal({
+        title: '<p class="h4">商品已從收藏中移除</p>',
+        icon: 'success'
+      })
+      this.getFavorite()
     }
   },
   computed: {
@@ -209,6 +283,9 @@ export default {
     this.getAllProducts()
     this.getProducts()
     this.getProduct()
+  },
+  mounted () {
+    this.getFavorite()
   }
 }
 </script>
@@ -216,12 +293,13 @@ export default {
 <style lang="scss" scoped>
 .banner {
   height: calc(30vh + 50px);
-  background-color: #ccc;
-  background: url('https://images.unsplash.com/photo-1594998440033-042baa3ee40c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80') 50% 25%;
+  background: url('https://images.unsplash.com/photo-1594998440033-042baa3ee40c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80');
+  background-position:50% 50%;
   background-size: cover;
 }
 .banner-box {
-  opacity: 0.8;
+  background-color: #000000;
+  opacity: 0.7;
 }
 .side-bar {
   cursor: pointer;
@@ -240,17 +318,20 @@ export default {
 .badge, .favorite{
   position: absolute;
   z-index: 2;
-  top: 10px;
+
 }
 .badge{
+  top: 10px;
   left: 10px;
 }
-.favorite {
-  right: 10px;
+.favorite{
+  top: -15px;
+  right: -8px;
 }
-// .add-btn{
-// display: inline-block;
-// }
+.favorite:hover{
+  color: red;
+  opacity: 0.5;
+}
 .add-btn button {
   display: block;
   padding: 16px 80px;
@@ -280,5 +361,10 @@ export default {
 }
 .view-detail:hover {
   opacity: 0.7;
+}
+.favoriteBtn{
+  background-color: red;
+  width: 30px;
+  height: 30px;
 }
 </style>

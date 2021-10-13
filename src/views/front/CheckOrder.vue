@@ -1,19 +1,38 @@
 <template>
   <div>
-    <div class="banner mb-5">
-      <div class="d-flex justify-content-center align-items-center h-100">
-        <div class="container">
-          <ul class="row">
-            <li class="banner-box col-lg-12 col-md-12 col-12 bg-dark text-light py-2 py-sm-4">
-              <h2 class="text-center p-4">填寫購物資料</h2>
-            </li>
-          </ul>
+    <!-- Banner -->
+    <div class="banner container-fluid d-flex align-items-center justify-content-center my-5">
+      <div class="row banner-box p-3 w-100">
+        <div class="text-white text-center ">
+          <h2 class="text-center p-4">填寫購物資料</h2>
         </div>
       </div>
     </div>
     <!--購物車清單-->
     <div class="container mb-6">
-      <div class="row row-cols-2">
+      <div class="row">
+        <div class="d-flex">
+          <ul class="steps list-unstyled d-flex justify-content-between position-relative mx-auto mb-5">
+            <li class="steps-item active w-33 d-flex flex-column align-items-center py-2 px-4">
+                <p class="steps-circle d-flex justify-content-center align-items-center bg-danger">
+                  <span class="h3 text-white text-center pt-2">1</span>
+                </p>
+              資料填寫
+            </li>
+            <li class="steps-item w-33 d-flex flex-column align-items-center py-2 px-4">
+              <p class="steps-circle d-flex justify-content-center align-items-center bg-third">
+                <span class="h3 text-white text-center pt-2">2</span>
+              </p>
+              訂單建立
+            </li>
+            <li class="steps-item w-33 d-flex flex-column align-items-center py-2 px-4">
+              <p class="steps-circle d-flex justify-content-center align-items-center bg-third">
+                <span class="h3 text-white text-center pt-2">3</span>
+              </p>
+              付款完成
+            </li>
+          </ul>
+        </div>
         <!--會員資料-->
         <div class="col-lg-6 col-md-6 col-12 member-data mb-5">
           <div class="title bg-secondary p-2 text-light text-center">
@@ -115,7 +134,7 @@
             <div class="row">
               <div class="btn col-6">
                 <router-link :to="`/cart`"
-                            class="btn btn-secondary text-light mx-3"
+                            class="btn btn-secondary text-light"
                 >
                   回購物車
                 </router-link>
@@ -263,11 +282,12 @@ export default {
 .banner {
   height: calc(30vh + 50px);
   background-color: #ccc;
-  background: url('https://images.unsplash.com/photo-1594998440033-042baa3ee40c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80') 50% 25%;
+  background: url('https://images.unsplash.com/photo-1514742923401-b8ae3074e468?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80') 50% 30%;
   background-size: cover;
 }
 .banner-box {
-  opacity: 0.8;
+  background-color: #000000;
+  opacity: 0.7;
 }
 .cart-list, .member-data{
   padding: 0 20px;
@@ -312,5 +332,10 @@ export default {
     background-color: rgba(154, 149, 149, 0.6);
     opacity: 0;
   }
+}
+.steps-circle{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 </style>

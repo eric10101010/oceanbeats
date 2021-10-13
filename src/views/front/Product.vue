@@ -1,17 +1,14 @@
  <template>
+ <Loading :active="isLoading" :z-index="1060"></Loading>
   <div>
     <!-- Banner -->
-    <section class="banner mb-5">
-      <div class="d-flex justify-content-center align-items-center h-100">
-        <div class="container">
-          <ul class="row">
-            <li class="banner-box col-lg-12 col-md-12 col-12 bg-dark text-light py-2 py-sm-4">
-              <h2 class="text-center p-4">商品資訊</h2>
-            </li>
-          </ul>
+    <div class="banner container-fluid d-flex align-items-center justify-content-center my-5">
+      <div class="row banner-box p-3 w-100">
+        <div class="text-white text-center ">
+          <h2 class="text-center p-4">商品資訊</h2>
         </div>
       </div>
-    </section>
+    </div>
     <!-- breadcrumb -->
     <section class="breadcrumb container">
       <nav aria-label="breadcrumb row mb-3">
@@ -49,14 +46,15 @@
             </div>
             <!--商品右側文字資訊-->
             <div class="col-12 col-md-6 col-lg-6">
-
-              <div class="px-5 px-md-0">
-
-                <div class="text-dark fw-bolder p-3 py-2 text-center" >
-                  <h1 class="mb-4">{{ product.title }}</h1>
-                  <h2 class="mb-3 h5">{{ product.content }}</h2>
-                  <h2 class="mb-4 h5">{{ product.content }}</h2>
-
+              <div class="pb-5 px-md-0">
+                <div class="p-3 py-2" >
+                  <h1 class="mb-4 fw-bolder text-center">{{ product.title }}{{ product.category }} </h1>
+                  <h2 class="mb-3 h4 text-third text-center">{{ product.content }}</h2>
+                  <div class="py-4 text-center">
+                    <h3 class="fw-bolder w-100"><span><i class="bi bi-truck pe-3"></i></span>全店不限金額免運費</h3>
+                    <h3 class="fw-bolder w-100"><span><i class="bi bi-cash-coin pe-3"></i></span>使用優惠券可省更多</h3>
+                    <h3 class="fw-bolder w-100"><span><i class="bi bi-tools pe-3"></i></span>本站商品含一年保固</h3>
+                  </div>
                   <div class="d-flex align-items-center justify-content-center">
                     <p class="h5 text-third text-decoration-line-through me-2" v-if="product.price !== product.origin_price">
                       NT${{ product.origin_price }}
@@ -69,13 +67,13 @@
                   <!--選擇數量按鈕-->
                   <div class="num-box d-flex align-items-center justify-content-center pt-1">
                     <div class="d-flex">
-                      <a href="#" class="btn btn-outline-dark d-flex align-items-center"
+                      <a href="#" class="btn btn-outline-third d-flex align-items-center"
                         @click.prevent="calculator('minus')">
                         -
                       </a>
                       <input type="number" min="1" class="bg-light border-1 border-third text-dark text-center input--num" v-model="buyNum">
 
-                      <a href="#" class="btn btn-outline-dark d-flex align-items-center"
+                      <a href="#" class="btn btn-outline-third d-flex align-items-center"
                           @click.prevent="calculator('plus')">
                         +
                       </a>
@@ -85,11 +83,11 @@
                   <div class="cart-btn btn mt-4 d-flex align-items-center justify-content-center">
 
                     <router-link class="btn btn-secondary p-3 px-4 text-light d-flex align-items-center" :to="`/products`"  >
-                     <span><i class="bi bi-bag"></i>返回購物</span>
+                     <span><i class="bi bi-bag pe-2"></i>返回購物</span>
                     </router-link>
 
-                    <a href="#" class="btn btn-danger p-3 mx-3 text-light text-decoration-none" @click.prevent="addCart">
-                     <span><i class="bi bi-cart"></i>加入購物車</span>
+                    <a href="#" class="btn btn-danger p-3 mx-3 text-light text-decoration-none" @click.prevent="addToCart(product.id, qty)">
+                     <span><i class="bi bi-cart pe-2"></i>加入購物車</span>
                     </a>
 
                   </div>
@@ -117,7 +115,7 @@
                         aria-selected="true"
                         data-cursor="cursor"
                 >
-                  商品介紹
+                  商品規格
                 </button>
               </li>
               <li class="nav-item w-30 w-md-auto" role="presentation">
@@ -155,39 +153,41 @@
                    role="tabpanel"
                    aria-labelledby="introduction-tab"
               >
-                {{ product.description }}
+                <ul class="w-75">
+                  <li class="pb-2 bg-info">產品型號：{{ product.title }}</li>
+                  <li class="pb-2">防水係數：IPX4</li>
+                  <li class="pb-2 bg-info">驅動單元：{{ product.drivers }}</li>
+                  <li class="pb-2">通訊使用頻段：{{ product.infor }}</li>
+                  <li class="pb-2 bg-info">響應範圍：{{ product.fequency }}KHz</li>
+                  <li class="pb-2">耳機重量：{{ product.weight }}</li>
+                </ul>
               </div>
-
               <div class="tab-pane fade text-dark"
                    id="notice"
                    role="tabpanel"
                    aria-labelledby="notice-tab"
               >
-                <p>
-                  ※ 實際的尺寸與重量會因配備的不同而有所差異。<br/>
-                  ※ 產品顏色會因網頁呈現而有些許差異，以收到實品為準。
-                  ※ 規格可能依機型配置而有所改變，產品規格若敘述有誤，請以實物為主。
-                  ※ 使用前請確實遵從產品說明書內之操作指示及注意事項。
-                  ※ 以上規格資料若有任何錯誤，以官方所公佈資料為準。
-                  ※ 基於安全考量，藍牙商品出廠時僅有些許電力，因電池自然放電現象，初次開機時可能會出現低電量或無電量之情形。
-                  ※ 因改良而有變更時，以官方所公佈資料為準，恕不另行通知。
-                  ※ 為了方便客戶及加速流程本公司不提供「換貨服務」，只能「退貨處理」
-                </p>
+              <ul>
+                <li class="pb-2">實際的尺寸與重量會因配備的不同而有所差異。</li>
+                <li class="pb-2">產品顏色會因網頁呈現而有些許差異，以收到實品為準。</li>
+                <li class="pb-2">規格可能依機型配置而有所改變，產品規格若敘述有誤，請以實物為主。</li>
+                <li>使用前請確實遵從產品說明書內之操作指示及注意事項。</li>
+              </ul>
               </div>
               <div class="tab-pane fade text-dark"
                    id="shipping"
                    role="tabpanel"
                    aria-labelledby="shipping-tab"
               >
-                <p>
-                  ■ 運送及其他說明
-                  送貨方式：透過宅配送達。
-                  消費者訂購之商品若經配送兩次無法送達，再經本公司以電話與Email均無法聯繫逾三天者，本公司將取消該筆訂單，並且全額退款。
-                  送貨範圍：本島各地各縣市、澎湖部分地區、金門部分地區（大金門、小金門）、小琉球、馬祖全部地區、綠島
-                  以下區域恕不提供宅急便包裹收送服務：
-                  宜蘭縣-釣魚台列嶼(全)，高雄市-東沙(全)、南沙(全)，澎湖縣-馬公(虎井島、桶盤島)、望安(全)、七美(全)、白沙(大倉嶼、員貝嶼、鳥嶼、吉貝嶼)，金門縣-烈嶼(大膽島、二膽島)、烏坵(全)、台東縣-蘭嶼(全)
-                  注意！收件地址請勿為郵政信箱。
-                </p>
+              <ul>
+                <li class="pb-4">運送及其他說明:</li>
+                <li class="pb-2">送貨方式：透過宅配送達。</li>
+                <li class="pb-2">規消費者訂購之商品若經配送兩次無法送達，再經本公司以電話與Email均無法聯繫逾三天者，</li>
+                <li class="pb-2">本公司將取消該筆訂單，並且全額退款。</li>
+                <li>送貨範圍：本島各地各縣市、澎湖部分地區、<br/>
+                  金門部分地區（大金門、小金門）、小琉球、馬祖全部地區、綠島。
+                </li>
+              </ul>
               </div>
             </div>
 
@@ -198,7 +198,7 @@
     <!-- 類似商品 -->
     <section class="similar-product">
       <div class="container pt-3 pb-5">
-        <h2 class="text-center mb-5">為您推薦</h2>
+        <h2 class="text-primary text-center mb-5 fw-bolder">為您推薦</h2>
         <div class="row">
           <swiper
             :slides-per-view="slideNum"
@@ -211,12 +211,10 @@
               "disableOnInteraction": false
             }'
           >
-            <swiper-slide class="col-3 mb-5 position-relative" v-for="item of filterCart" :key="item.id">
-              <div class="card position-relative box--shadow">
-                <!--推薦商品-分類tag--->
-
+            <swiper-slide class="col-lg-3 col-md-6 col-sm-12 mb-5 position-relative" v-for="item of filterCart" :key="item.id">
+              <div class="card position-relative box-shadow">
                 <!--推薦商品-圖片區塊--->
-                <router-link class="card-img d-block" :to="`/product/${item.id}`">
+                <router-link class="card-img d-block" :to="`/product/${item.id}`" >
                   <div class="products-img p-3"
                       :style="{ 'background-image': `url(${item.imageUrl})` }"
                   >
@@ -233,13 +231,10 @@
                   <p class="text-danger text-center fw-bolder h5">
                     ${{ item.price }}
                   </p>
-                  <div class="d-flex justify-content-between">
-                    <a href="#" class="btn btn-primary d-flex align-items-center justify-content-center" @click.prevent="addCart">
-                      <span><i class="bi bi-cart"></i>加入購物車</span>
+                  <div class="d-flex justify-content-center">
+                    <a href="#" class="btn btn-secondary text-white w-100" @click.prevent="addToCart(item.id, qty)">
+                      <span><i class="bi bi-cart pe-3"></i>加入購物車</span>
                     </a>
-                    <router-link class="btn btn-secondary d-flex align-items-center" :to="`/product/${item.id}`">
-                      <span><i class="bi bi-cart"></i>查看商品</span>
-                    </router-link>
                   </div>
                 </div>
               </div>
@@ -265,6 +260,7 @@ export default {
   },
   data () {
     return {
+      isLoading: false,
       product: {},
       slideNum: 0,
       products: [],
@@ -273,10 +269,12 @@ export default {
   },
   methods: {
     getProduct () {
-      const Id = this.$route.params.id
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${Id}`
+      this.isLoading = true
+      const id = this.$route.params.id
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${id}`
       this.$http.get(url)
         .then(res => {
+          this.isLoading = false
           console.log(res)
           this.product = res.data.product
         })
@@ -319,6 +317,43 @@ export default {
           }
         })
         .catch(err => console.log(err))
+    },
+    addToCart (id, qty) {
+      this.isLoading = true
+      this.qty = qty
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      const cart = {
+        product_id: id,
+        qty: 1
+      }
+      this.$http
+        .post(api, { data: cart })
+        .then((response) => {
+          if (response.data.success) {
+            this.isLoading = false
+            // 當有品項加入購物車，就會重新取得購物車一次 (navbar 的cartIcon)
+            emitter.emit('update-cart')
+            this.$swal({
+              title: `<p class="h4"> ${response.data.data.product.title} 加入購物車</p>`,
+              icon: 'success'
+            })
+          } else {
+            this.$swal({
+              title: `<p class="h4">${response.data.message}</p>`,
+              icon: 'error'
+            })
+          }
+        })
+        .catch((err) => {
+          this.$swal({
+            title: `<p class="h4">${err} 發生錯誤，請重新整理頁面</p>`,
+            icon: 'error'
+          })
+        })
+    },
+    goProduct (id) {
+      this.$router.push(`/product/${id}`)
+      this.getProduct()
     }
   },
   computed: {
@@ -326,12 +361,26 @@ export default {
       return this.products.filter(item => item.category === this.product.category && (item.id !== this.product.id))
     }
   },
-  created () {
-    this.getProduct()
+  // watch: {
+  //   $route () {
+  //     if (this.$route.name === 'product') {
+  //       this.getProduct()
+  //     }
+  //   }
+  // },
+  watch: {
+    $route () {
+      this.getProduct()
+    }
   },
+  // created () {
+  //   this.getProduct()
+  // },
   mounted () {
+    this.getProduct()
     this.getProducts()
   }
+
 }
 </script>
 
@@ -343,7 +392,8 @@ export default {
   background-size: cover;
 }
 .banner-box {
-  opacity: 0.8;
+  background-color: #000000;
+  opacity: 0.7;
 }
 .products-img{
     width: 100%;

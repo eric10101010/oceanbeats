@@ -21,6 +21,11 @@ const routes = [
         component: () => import('../views/front/Contact.vue')
       },
       {
+        path: '/favorite',
+        name: 'Favorite',
+        component: () => import('../views/front/Favorite.vue')
+      },
+      {
         path: 'products',
         name: 'Products',
         component: () => import('../views/front/Products.vue')
@@ -46,11 +51,6 @@ const routes = [
         component: () => import('../views/front/CheckoutOrder.vue')
       }
     ]
-  },
-  {
-    path: '/header',
-    name: 'Header',
-    component: () => import('../views/Header.vue')
   },
   // 登入&登入失敗路由
   {

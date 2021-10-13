@@ -1,13 +1,10 @@
 <template>
 <div>
-  <div class="banner mb-5">
-    <div class="d-flex justify-content-center align-items-center h-100">
-      <div class="container">
-        <ul class="row">
-          <li class="banner-box col-lg-12 col-md-12 col-12 bg-dark text-light py-2 py-sm-4">
-            <h2 class="text-center p-4">購物車</h2>
-          </li>
-        </ul>
+  <!-- Banner -->
+  <div class="banner container-fluid d-flex align-items-center justify-content-center my-5">
+    <div class="row banner-box p-3 w-100">
+      <div class="text-white text-center ">
+        <h2 class="text-center p-4">購物車</h2>
       </div>
     </div>
   </div>
@@ -19,13 +16,13 @@
           購物車內<br>目前沒有商品唷!
         </h2>
       </div>
-      <router-link :to="`/products`" class="btn btn-warning text-light my-6">
+      <router-link :to="`/products`" class="btn btn-secondary text-white my-6">
         <h3 class="h4 my-2">返回購物列表</h3>
       </router-link>
     </div>
   </div>
+  <!-- 購物車 商品資料-->
   <div class="container my-5" v-if="cart.final_total">
-    <!-- 購物車 商品資料-->
     <div class="row d-flex justify-content-evenly">
       <div class="col-lg-7 col-md-7 col-12 mb-4">
         <div class="title bg-secondary py-2 text-light text-center">
@@ -49,9 +46,9 @@
               <p>小計</p>
             </div>
           </div>
-          <div class="cart-list align-items-center text-center">
+          <div class="cart-listtext-center">
             <div v-for="item in cart.carts" :key="item.id" :loading="loadingStatus"
-                class="row py-3 text-dark text-center p-0 border-bottom">
+                 class="row py-3 text-dark text-center p-0 border-bottom">
               <div class="col-lg-3 col-md-3 col-3 d-flex justify-content-center align-item-center m-auto">
                 <div class="box d-flex flex-column">
                   <img :src="item.product.imageUrl" alt="" style="max-width:80px;min-height:60px;"/>
@@ -60,7 +57,6 @@
                     <p class="d-xl-block d-md-block d-sm-block"><span class="teext-success text-center">優惠劵<i class="bi bi-patch-check-fill"></i></span></p>
                   </div>
                 </div>
-
               </div>
               <div class="col-lg-2 col-md-2 col-3 d-flex align-items-center justify-content-start">
                 <p class="fw-bold ">{{item.product.price}}</p>
@@ -68,7 +64,7 @@
               <div class="col-lg-3 col-md-4 col-2 text-center m-auto d-flex justify-content-center" >
                 <div class="d-inline-block d-lg-flex d-md-flex d-sm-flex">
                   <button type="button"
-                          class="btn btn-outline-light d-flex text-dark border border-third"
+                          class="btn btn-outline-third d-flex text-dark border border-third"
                           @click="minusQty(item)"
                           :class="{ disabled: item.qty <= 1 || isChageQty }"
                   >
@@ -84,7 +80,7 @@
                   </span>
 
                   <button type="button"
-                          class="btn btn-outline-light d-flex align-items-center text-dark border border-third"
+                          class="btn btn-outline-third d-flex align-items-center text-dark border border-third"
                           @click="addQty(item)"
                           :class="{ disabled: isChageQty }"
                   >
@@ -351,11 +347,12 @@ export default {
 .banner {
   height: calc(30vh + 50px);
   background-color: #ccc;
-  background: url('https://images.unsplash.com/photo-1594998440033-042baa3ee40c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80') 50% 25%;
+  background: url('https://images.unsplash.com/photo-1514742923401-b8ae3074e468?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80') 50% 30%;
   background-size: cover;
 }
 .banner-box {
-  opacity: 0.8;
+  background-color: #000000;
+  opacity: 0.7;
 }
 .product-img {
   width: 80px;

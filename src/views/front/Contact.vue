@@ -1,14 +1,11 @@
 <template>
   <div>
   <Navbar></Navbar>
-    <div class="banner my-5">
-      <div class="d-flex justify-content-center align-items-center h-100">
-        <div class="container">
-          <div class="row">
-            <div class="banner-box col-lg-12 col-md-12 col-12 bg-dark text-light py-2 py-sm-4">
-              <h2 class="text-center p-4">聯絡資訊</h2>
-            </div>
-          </div>
+    <!-- Banner -->
+    <div class="banner container-fluid d-flex align-items-center justify-content-center my-5">
+      <div class="row banner-box p-3 w-100">
+        <div class="text-white text-center ">
+          <h2 class="text-center p-4">商品列表</h2>
         </div>
       </div>
     </div>
@@ -132,11 +129,12 @@ export default {
 .banner {
   height: calc(30vh + 50px);
   background-color: #ccc;
-  background: url('https://images.unsplash.com/photo-1594998440033-042baa3ee40c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80') 50% 25%;
+  background: url('https://images.unsplash.com/photo-1553117535-5edfe8ab4b8a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80') 50% 60%;
   background-size: cover;
 }
 .banner-box {
-  opacity: 0.8;
+  background-color: #000000;
+  opacity: 0.7;
 }
 .shop-img{
   min-width: 400px;
