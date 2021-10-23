@@ -68,7 +68,7 @@
         </div>
       </div>
       <!---人物介紹----->
-      <div class="row mt-4">
+      <!-- <div class="row mt-4">
         <h2 class="text-center display-5 text-light fw-bolder pb-4">團隊成員</h2>
         <div class="box col-xl-4 col-md-4 col-12">
           <div class="team-img">
@@ -99,7 +99,7 @@
             <p class="h4 pb-4">Bruno wayne</p>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
