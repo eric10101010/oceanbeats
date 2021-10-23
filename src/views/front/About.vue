@@ -70,7 +70,7 @@
       <!---人物介紹----->
       <div class="row mt-4">
         <h2 class="text-center display-5 text-light fw-bolder pb-4">團隊成員</h2>
-        <div class="box col-lg-4 col-md-4 col-12">
+        <div class="box col-xl-4 col-md-4 col-12">
           <div class="team-img">
             <img src="https://images.unsplash.com/photo-1586293580848-eca4adb9647c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1300&q=80" alt="">
           </div>
@@ -80,7 +80,7 @@
           </div>
         </div>
 
-        <div class="box col-lg-4 col-md-4 col-12">
+        <div class="box col-xl-4 col-md-4 col-12">
           <div class="team-img">
             <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80" alt="">
           </div>
@@ -90,7 +90,7 @@
           </div>
         </div>
 
-        <div class="box col-lg-4 col-md-4 col-12">
+        <div class="box col-xl-4 col-md-4 col-12">
           <div class="team-img">
             <img src="https://images.unsplash.com/photo-1624395213043-fa2e123b2656?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80" alt="">
           </div>
