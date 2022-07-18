@@ -5,7 +5,7 @@
     <div class="banner container-fluid d-flex align-items-center justify-content-center my-5">
       <div class="row banner-box p-3 w-100">
         <div class="text-white text-center ">
-          <h2 class="text-center p-4">商品列表</h2>
+          <h2 class="text-center p-4">聯絡資訊</h2>
         </div>
       </div>
     </div>
